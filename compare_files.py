@@ -1,3 +1,5 @@
+
+
 def read_lines_from_file(filepath: str) -> set:
     """
     Зчитує лінії з файлу і повертає множину рядків

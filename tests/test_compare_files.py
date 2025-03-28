@@ -1,15 +1,19 @@
 import pytest
-from compare_files import read_lines_from_file, compare_sets, write_lines_to_file
+from compare_files import (read_lines_from_file, compare_sets,
+                           write_lines_to_file)
+
 
 @pytest.fixture
 def temp_file(tmp_path):
     """
     Фікстура, що створює тимчасовий файл і повертає шлях до нього.
     """
+
     def _create_temp_file(filename, content):
         file_path = tmp_path / filename
-        file_path.write_text(content, encoding='utf-8')
+        file_path.write_text(content, encoding="utf-8")
         return file_path
+
     return _create_temp_file
 
 
@@ -20,23 +24,15 @@ def temp_file(tmp_path):
             "apple\nbanana\norange",
             "banana\npear\napple",
             {"apple", "banana"},
-            {"orange", "pear"}
+            {"orange", "pear"},
         ),
-        (
-            "cat\ndog\nmouse",
-            "dog\nlion\nmouse",
-            {"dog", "mouse"},
-            {"cat", "lion"}
-        ),
-        (
-            "",
-            "test\nexample",
-            set(),
-            {"test", "example"}
-        ),
-    ]
+        ("cat\ndog\nmouse", "dog\nlion\nmouse", {"dog", "mouse"},
+         {"cat", "lion"}),
+        ("", "test\nexample", set(), {"test", "example"}),
+    ],
 )
-def test_compare_sets(content_a, content_b, expected_same, expected_diff, temp_file):
+def test_compare_sets(content_a, content_b, expected_same, expected_diff,
+                      temp_file):
     file_a = temp_file("file_a.txt", content_a)
     file_b = temp_file("file_b.txt", content_b)
 
