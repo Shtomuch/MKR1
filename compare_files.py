@@ -1,8 +1,9 @@
 def read_lines_from_file(filepath: str) -> set:
     """
-    Зчитує лінії з файлу і повертає множину рядків (без переносів).
+    Зчитує лінії з файлу і повертає множину рядків
+    (без переносів).
     """
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         lines = f.read().splitlines()
     return set(lines)
 
@@ -17,13 +18,15 @@ def compare_sets(set_a: set, set_b: set) -> (set, set):
     diff = set_a.symmetric_difference(set_b)
     return same, diff
 
+
 def write_lines_to_file(filepath: str, lines: set) -> None:
     """
     Записує множину рядків у текстовий файл (по одному рядку на файл).
     """
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         for line in sorted(lines):
             f.write(line + "\n")
+
 
 def main(file1: str, file2: str) -> None:
     """
@@ -37,13 +40,14 @@ def main(file1: str, file2: str) -> None:
 
     same_lines, diff_lines = compare_sets(set1, set2)
 
-    write_lines_to_file('same.txt', same_lines)
-    write_lines_to_file('diff.txt', diff_lines)
+    write_lines_to_file("same.txt", same_lines)
+    write_lines_to_file("diff.txt", diff_lines)
 
 
 if __name__ == "__main__":
 
     import sys
+
     if len(sys.argv) != 3:
         print("Usage: python compare_files.py <file1.txt> <file2.txt>")
         sys.exit(1)
