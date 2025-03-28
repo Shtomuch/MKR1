@@ -16,3 +16,11 @@ def compare_sets(set_a: set, set_b: set) -> (set, set):
     same = set_a.intersection(set_b)
     diff = set_a.symmetric_difference(set_b)
     return same, diff
+
+def write_lines_to_file(filepath: str, lines: set) -> None:
+    """
+    Записує множину рядків у текстовий файл (по одному рядку на файл).
+    """
+    with open(filepath, 'w', encoding='utf-8') as f:
+        for line in sorted(lines):
+            f.write(line + "\n")
